@@ -5,17 +5,31 @@ import pandas as pd
 import glob
 import os
 
-directory = input("Folder: ")  # stegged
-dSets = len(os.listdir(directory))
-print(dSets)
-image = 0  # set image variable to 0
+while True:
+    try:
+        directory = input("Folder: ")  # stegged
+        dSets = len(os.listdir(directory))
+        print(dSets)
+        image = 0  # set image variable to 0
+
+        break
+    except FileNotFoundError:
+        print('Directory not found, Please try again')
+
+while True:
+    fileT = input('What file type do you want to use? ')
+    if fileT == '.png' or '.bmp' or 'jpg':
+        break
+    else:
+        print('File type not supported')
+
 
 for x in range(0, dSets):  # loops for each differnt data set
 
     dSets = x + 1  # increment to use next data folder each loop
     dSets = str(dSets)
 
-    if directory == 'BMPSteg' or 'JPGSteg':
+    if directory == 'BMPSteg' or 'JPGSteg' or 'stegged':
 
         process = len(os.listdir(directory + '/' + dSets))
 
@@ -23,7 +37,7 @@ for x in range(0, dSets):  # loops for each differnt data set
 
             image = x + 1  # add one to x to use as file identifier once saved
             image = str(image)  # convert to string to use in file path
-            img = cv2.imread(directory + '/' + dSets + '/' + image + '.bmp', cv2.IMREAD_COLOR)  # read in image using directory and loops
+            img = cv2.imread(directory + '/' + dSets + '/' + image + '.png', cv2.IMREAD_COLOR)  # read in image using directory and loops
             histSim1 = pd.DataFrame(cv2.calcHist([img], [1], None, [256], [0, 256]))  # create histo in channel 1
             histSim1.to_csv('stmp/' + dSets + '/' + image + 'CC1.csv', index=False)  # save histo plots as .csv
             histSim2 = pd.DataFrame(cv2.calcHist([img], [2], None, [256], [0, 256]))  # create histo in channel 2
