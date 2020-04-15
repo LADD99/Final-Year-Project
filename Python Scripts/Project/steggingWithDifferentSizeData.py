@@ -2,16 +2,16 @@ import stegano
 from stegano import lsb
 import os
 import sys
-
+#this program was used for tests 1, 2 and 3. Stegano was initially used to do the stegging of images for each of the tests
 while True:
     try:
-        iDirectory = input("Input Folder: ")  # toSteg
+        iDirectory = input("Input Folder: ") 
         proc = len(os.listdir(iDirectory))  # get number of files in input folder
         print(proc)  # show number of files that will be processed
         dDirectory = input("Data Folder: ")  # folder where the data to steg is kept #Encrypted
         eData = len(os.listdir(dDirectory))  # number of files in that folder
         print(eData)
-        oDirectory = input("Output Folder: ")  # where the stegged images will end up #stegged
+        oDirectory = input("Output Folder: ")  # where the stegged images will end up
 
         image = 0
         dFile = 0
